@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %}
+{%load static %}
+
+{% block title %}logout{% endblock title %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+{% endblock stylesheets %}
+{% block body %}
+<form method="post" action="{% url 'accounts:logout' %}">
+    {% csrf_token %}
+    <h1>Do u really want to logout ?</h1>
+    
+    <input type="submit" value="logout">
+</form>
+{% endblock body %}

@@ -1,0 +1,44 @@
+
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+{% block title %}new_posts{% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+{% endblock stylesheets %}
+{% block body %}
+
+
+<div class='container'>
+ <div class='row'>
+  <div class='col-md-8 mx-auto'>
+  <h1 class='text-center mb-4'>New post </h1>
+   <form action='' method='POST'enctype='multipart/form-data' >
+   {% if form.subject.errors %}
+   {% for error in form.subject.errors %}
+   <p class='text-danger' > <strong>{{ error }}</strong></p>
+   {% endfor%}
+   {% endif %}
+   {% csrf_token %}
+   {% for field in form %}
+   <div class='form-group'>
+    <strong>{{ field.label_tag }}</strong>
+    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    {{field}}
+    {% if field.help_text %}
+    <p class='help'>{{ field.help_text }}</p>
+    {% if field.error %}
+   {% for error in field.error %}
+   <p class='text-danger' > <strong>{{ error }}</strong></p>
+   {% endfor%}
+   {% endif %}
+    {% endif %}
+   </div>
+   {% endfor %}
+   <input type='submit' class='btn btn-primary' value='post'>
+  </div>
+ </div>
+ <div class='col-md-4'></div>
+</div>
+{% endblock body %}

@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Detail{% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+{% endblock stylesheets %}
+
+{% block body %}
+<div class="card shadow" >
+    {% if post.image %}
+      <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+      {% endif %}
+     <div class="card mb-3 shadow">
+        <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-title">{{post.content}}</p>
+        </div>
+    </div>
+    {% if post.user == request.user %}
+    <div class="card-footer">
+        <a href="{% url 'posts:update_post' post.id %}" class='btn btn-success'>update_post</a>
+		<a href="{% url 'posts:delete_post' post.id %}" class='btn btn-danger'>delete_post</a>
+    </div>
+    {% endif %}
+{% endblock body %}
